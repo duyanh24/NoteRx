@@ -19,12 +19,14 @@ class SplashViewController: BaseViewController, ViewModelBased {
     
     private func naviagteToHomeScreen() {
         let homeViewModel = HomeViewModel()
-        let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel)
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let homeViewController = HomeViewController.instantiate(withViewModel: homeViewModel) else {
             return
         }
+        let navController = UINavigationController(rootViewController: homeViewController)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            appDelegate.window?.rootViewController = homeViewController
+            appDelegate.window?.rootViewController = navController
         }
     }
 }

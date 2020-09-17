@@ -8,3 +8,8 @@
 //
 
 import Foundation
+
+struct StringConstants {
+    static let dateFormat = "HH:mm E, d MMM y"
+    static let noteTitle = "Note"
+}

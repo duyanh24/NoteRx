@@ -9,7 +9,9 @@
 import UIKit
 
 class NoteTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +23,8 @@ class NoteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupData(note: Note) {
+        titleLabel.text = note.title
+        dateLabel.text = note.date
+    }
 }

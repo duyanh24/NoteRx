@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+extension Date {
+    func convertDateToString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = StringConstants.dateFormat
+        return formatter.string(from: self)
+    }
+}

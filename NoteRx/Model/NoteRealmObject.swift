@@ -44,6 +44,19 @@ class NoteRealmObject: Object {
         }
     }
     
+    func addNote() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                id = Self.getIdMax() + 1
+                let object = realm.create(NoteRealmObject.self, value: self, update: .all)
+                realm.add(object)
+            }
+        } catch let error {
+            print(error)
+        }
+    }
+    
     static func getIdMax() -> Int {
         do {
             let realm = try Realm()

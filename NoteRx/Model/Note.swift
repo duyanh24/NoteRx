@@ -18,4 +18,10 @@ struct Note {
         self.title = noteRealmObject.title
         self.content = noteRealmObject.content
     }
+    
+    init(id: Int, title: String, content: String) {
+        self.id = id
+        self.title = title
+        self.content = content
+    }
 }

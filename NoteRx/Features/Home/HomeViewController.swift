@@ -49,5 +49,10 @@ class HomeViewController: BaseViewController, ViewModelBased {
     }
     
     @objc private func addNoteButtonClicked() {
+        let noteDetailViewModel = NoteDetailViewModel()
+        guard let noteDetalViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+            return
+        }
+        navigationController?.pushViewController(noteDetalViewController, animated: true)
     }
 }

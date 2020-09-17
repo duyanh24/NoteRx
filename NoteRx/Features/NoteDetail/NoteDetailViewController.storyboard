@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="syX-Io-FP8">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Note Detail View Controller-->
+        <scene sceneID="E0p-Ru-6X7">
+            <objects>
+                <viewController storyboardIdentifier="NoteDetailViewController" id="syX-Io-FP8" customClass="NoteDetailViewController" customModule="NoteRx" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FZs-o8-yqJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chủ đề" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjF-ho-1gt">
+                                <rect key="frame" x="20" y="64" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Drp-NK-asP">
+                                <rect key="frame" x="20" y="95" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nMN-zj-6oE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F86-7h-Wq6">
+                                <rect key="frame" x="20" y="175" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wv8-g2-0bi">
+                                <rect key="frame" x="20" y="216" width="374" height="626"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="mAm-lA-DQh" firstAttribute="bottom" secondItem="wv8-g2-0bi" secondAttribute="bottom" constant="20" id="6SK-eF-Fme"/>
+                            <constraint firstItem="wjF-ho-1gt" firstAttribute="top" secondItem="mAm-lA-DQh" secondAttribute="top" constant="20" id="87Z-LI-7Yo"/>
+                            <constraint firstItem="wv8-g2-0bi" firstAttribute="leading" secondItem="mAm-lA-DQh" secondAttribute="leading" constant="20" id="Aad-Ct-0Lr"/>
+                            <constraint firstItem="F86-7h-Wq6" firstAttribute="leading" secondItem="mAm-lA-DQh" secondAttribute="leading" constant="20" id="F5r-Rg-589"/>
+                            <constraint firstItem="mAm-lA-DQh" firstAttribute="trailing" secondItem="Drp-NK-asP" secondAttribute="trailing" constant="20" id="Lrk-ih-AfC"/>
+                            <constraint firstItem="mAm-lA-DQh" firstAttribute="trailing" secondItem="F86-7h-Wq6" secondAttribute="trailing" constant="20" id="MB8-KC-KZJ"/>
+                            <constraint firstItem="mAm-lA-DQh" firstAttribute="trailing" secondItem="wjF-ho-1gt" secondAttribute="trailing" constant="20" id="Q0Z-Wg-IHn"/>
+                            <constraint firstItem="Drp-NK-asP" firstAttribute="leading" secondItem="mAm-lA-DQh" secondAttribute="leading" constant="20" id="VDL-Mo-QnY"/>
+                            <constraint firstItem="F86-7h-Wq6" firstAttribute="top" secondItem="Drp-NK-asP" secondAttribute="bottom" constant="30" id="alK-lv-mjg"/>
+                            <constraint firstItem="mAm-lA-DQh" firstAttribute="trailing" secondItem="wv8-g2-0bi" secondAttribute="trailing" constant="20" id="eS2-ou-BMu"/>
+                            <constraint firstItem="Drp-NK-asP" firstAttribute="top" secondItem="wjF-ho-1gt" secondAttribute="bottom" constant="10" id="eSU-C8-Zup"/>
+                            <constraint firstItem="wv8-g2-0bi" firstAttribute="top" secondItem="F86-7h-Wq6" secondAttribute="bottom" constant="20" id="eiQ-6G-kOv"/>
+                            <constraint firstItem="wjF-ho-1gt" firstAttribute="leading" secondItem="mAm-lA-DQh" secondAttribute="leading" constant="20" id="f8X-Pf-Ve3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mAm-lA-DQh"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentTextView" destination="wv8-g2-0bi" id="XO6-Vo-J70"/>
+                        <outlet property="titleTextField" destination="Drp-NK-asP" id="uSA-lt-a5V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JvG-M4-cPT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="419" y="-340"/>
+        </scene>
+    </scenes>
+</document>

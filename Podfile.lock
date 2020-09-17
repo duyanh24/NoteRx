@@ -1,0 +1,17 @@
+PODS:
+  - Realm (5.4.1):
+    - Realm/Headers (= 5.4.1)
+  - Realm/Headers (5.4.1)
+  - RealmSwift (5.4.1):
+    - Realm (= 5.4.1)
+
+DEPENDENCIES:
+  - RealmSwift (~> 5.4.1)
+
+SPEC CHECKSUMS:
+  Realm: 7e887608ef1de2d0c3a33dd9b1449e08fc9d9807
+  RealmSwift: ef998d9b678fd74e047c56ef4d99d9b77e87c1eb
+
+PODFILE CHECKSUM: 4a059919cb8b1a106ca3ccfe0d909b7315b4e464
+
+COCOAPODS: 1.3.1

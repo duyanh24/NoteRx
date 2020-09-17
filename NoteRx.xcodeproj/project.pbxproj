@@ -19,6 +19,13 @@
 		08FAC6E225134D790046D1B4 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FAC6E125134D790046D1B4 /* SplashViewController.storyboard */; };
 		08FAC6E425134EDC0046D1B4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6E325134EDC0046D1B4 /* Note.swift */; };
 		08FAC6E625134F2B0046D1B4 /* NoteRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6E525134F2B0046D1B4 /* NoteRealmObject.swift */; };
+		08FAC6E9251355B80046D1B4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6E8251355B80046D1B4 /* HomeViewController.swift */; };
+		08FAC6EB251355D70046D1B4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6EA251355D70046D1B4 /* HomeViewModel.swift */; };
+		08FAC6ED251355EE0046D1B4 /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FAC6EC251355EE0046D1B4 /* HomeViewController.storyboard */; };
+		08FAC6F125135D5F0046D1B4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6EF25135D5F0046D1B4 /* NoteTableViewCell.swift */; };
+		08FAC6F225135D5F0046D1B4 /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FAC6F025135D5F0046D1B4 /* NoteTableViewCell.xib */; };
+		08FAC6F825135F900046D1B4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6F725135F900046D1B4 /* Date+Extension.swift */; };
+		08FAC6FB25135FE30046D1B4 /* StringConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAC6FA25135FE30046D1B4 /* StringConstans.swift */; };
 		7B8B8B5AD01828265619EBA2 /* Pods_NoteRx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8238AC6B540F6D3F1E654F69 /* Pods_NoteRx.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +44,13 @@
 		08FAC6E125134D790046D1B4 /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
 		08FAC6E325134EDC0046D1B4 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		08FAC6E525134F2B0046D1B4 /* NoteRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRealmObject.swift; sourceTree = "<group>"; };
+		08FAC6E8251355B80046D1B4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		08FAC6EA251355D70046D1B4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		08FAC6EC251355EE0046D1B4 /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
+		08FAC6EF25135D5F0046D1B4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		08FAC6F025135D5F0046D1B4 /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
+		08FAC6F725135F900046D1B4 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		08FAC6FA25135FE30046D1B4 /* StringConstans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstans.swift; sourceTree = "<group>"; };
 		8238AC6B540F6D3F1E654F69 /* Pods_NoteRx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteRx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A0A042DD30F57145ABDE15 /* Pods-NoteRx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteRx.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoteRx/Pods-NoteRx.release.xcconfig"; sourceTree = "<group>"; };
 		8A229DFCE2742709CACCE559 /* Pods-NoteRx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteRx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoteRx/Pods-NoteRx.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +140,9 @@
 		089402002513456200F8E8E3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				08FAC6F925135FC20046D1B4 /* Constants */,
+				08FAC6F625135F6F0046D1B4 /* Extensions */,
+				08FAC6F325135F350046D1B4 /* Helper */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -133,6 +150,7 @@
 		089402012513457300F8E8E3 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				08FAC6E7251355A60046D1B4 /* Home */,
 				08FAC6DC25134C7E0046D1B4 /* Splash */,
 			);
 			path = Features;
@@ -162,6 +180,49 @@
 				08FAC6E125134D790046D1B4 /* SplashViewController.storyboard */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		08FAC6E7251355A60046D1B4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				08FAC6EE25135D350046D1B4 /* TableViewCell */,
+				08FAC6E8251355B80046D1B4 /* HomeViewController.swift */,
+				08FAC6EA251355D70046D1B4 /* HomeViewModel.swift */,
+				08FAC6EC251355EE0046D1B4 /* HomeViewController.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		08FAC6EE25135D350046D1B4 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				08FAC6EF25135D5F0046D1B4 /* NoteTableViewCell.swift */,
+				08FAC6F025135D5F0046D1B4 /* NoteTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		08FAC6F325135F350046D1B4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		08FAC6F625135F6F0046D1B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08FAC6F725135F900046D1B4 /* Date+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		08FAC6F925135FC20046D1B4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				08FAC6FA25135FE30046D1B4 /* StringConstans.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		85CBE728E23D3D6C227E7ED4 /* Frameworks */ = {
@@ -242,8 +303,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FAC6ED251355EE0046D1B4 /* HomeViewController.storyboard in Resources */,
 				08FAC6E225134D790046D1B4 /* SplashViewController.storyboard in Resources */,
 				0881939D25133A0E0008E119 /* LaunchScreen.storyboard in Resources */,
+				08FAC6F225135D5F0046D1B4 /* NoteTableViewCell.xib in Resources */,
 				0881939A25133A0E0008E119 /* Assets.xcassets in Resources */,
 				0881939825133A0C0008E119 /* Main.storyboard in Resources */,
 			);
@@ -263,6 +326,9 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-NoteRx/Pods-NoteRx-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -270,6 +336,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -326,12 +395,17 @@
 			files = (
 				089402072513477300F8E8E3 /* ViewModelBased.swift in Sources */,
 				0881939525133A0C0008E119 /* ViewController.swift in Sources */,
+				08FAC6F825135F900046D1B4 /* Date+Extension.swift in Sources */,
 				08FAC6E425134EDC0046D1B4 /* Note.swift in Sources */,
+				08FAC6EB251355D70046D1B4 /* HomeViewModel.swift in Sources */,
 				089402042513462200F8E8E3 /* BaseViewController.swift in Sources */,
 				08FAC6DE25134CB80046D1B4 /* SplashViewModel.swift in Sources */,
+				08FAC6E9251355B80046D1B4 /* HomeViewController.swift in Sources */,
 				0881939125133A0C0008E119 /* AppDelegate.swift in Sources */,
 				08FAC6E625134F2B0046D1B4 /* NoteRealmObject.swift in Sources */,
+				08FAC6FB25135FE30046D1B4 /* StringConstans.swift in Sources */,
 				08FAC6E025134CDE0046D1B4 /* SplashViewController.swift in Sources */,
+				08FAC6F125135D5F0046D1B4 /* NoteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

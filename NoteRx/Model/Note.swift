@@ -12,10 +12,19 @@ struct Note {
     var id = -1
     var title = ""
     var content = ""
+    var date = ""
     
     init(noteRealmObject: NoteRealmObject) {
         self.id = noteRealmObject.id
         self.title = noteRealmObject.title
         self.content = noteRealmObject.content
+        self.date = noteRealmObject.date.convertDateToString()
+    }
+    
+    init(id: Int, title: String, content: String, date: String) {
+        self.id = id
+        self.title = title
+        self.content = content
+        self.date = date
     }
 }

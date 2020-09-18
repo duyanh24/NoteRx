@@ -9,17 +9,20 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 class HomeViewController: BaseViewController, ViewModelBased {
     @IBOutlet weak var noteTableView: UITableView!
     
     var viewModel: HomeViewModel!
     let disposeBag = DisposeBag()
+    private var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModelData()
         viewModel.getAllNote()
+        setupObserver()
     }
     
     private func bindViewModelData() {
@@ -33,6 +36,7 @@ class HomeViewController: BaseViewController, ViewModelBased {
     }
     
     private func setupTableView() {
+        noteTableView.delegate = self
         noteTableView.register(UINib(nibName: "NoteTableViewCell", bundle: nil), forCellReuseIdentifier: "NoteTableViewCell")
     }
     
@@ -48,11 +52,31 @@ class HomeViewController: BaseViewController, ViewModelBased {
         navigationItem.title = StringConstants.noteTitle
     }
     
+    private func setupObserver() {
+        let realm = try! Realm()
+        notificationToken = realm.objects(NoteRealmObject.self).observe({ [weak self] _ in
+            self?.viewModel.getAllNote()
+        })
+    }
+    
     @objc private func addNoteButtonClicked() {
-        let noteDetailViewModel = NoteDetailViewModel()
+        let noteDetailViewModel = NoteDetailViewModel(note: nil)
         guard let noteDetalViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
             return
         }
         navigationController?.pushViewController(noteDetalViewController, animated: true)
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard viewModel.listNote.value.indices.contains(indexPath.row) else {
+            return
+        }
+        let noteDetailViewModel = NoteDetailViewModel(note: viewModel.listNote.value[indexPath.row])
+        guard let noteDetailViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+            return
+        }
+        navigationController?.pushViewController(noteDetailViewController, animated: true)
     }
 }

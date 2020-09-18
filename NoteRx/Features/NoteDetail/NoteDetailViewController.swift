@@ -13,7 +13,7 @@ class NoteDetailViewController: BaseViewController, ViewModelBased {
     @IBOutlet weak var contentTextView: UITextView!
     
     var viewModel: NoteDetailViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +22,7 @@ class NoteDetailViewController: BaseViewController, ViewModelBased {
     override func setupUI() {
         super.setupUI()
         setupBarButton()
+        setupData()
     }
     
     private func setupBarButton() {
@@ -35,14 +36,23 @@ class NoteDetailViewController: BaseViewController, ViewModelBased {
             self.showToast(message : "Chưa nhập chủ đề ")
             return
         }
-//        guard let note = note else {
-//            NoteRealmService.share.addNote(note: Note(title: title, content: contentTextView.text ?? ""))
-//            navigationController?.popViewController(animated: true)
-//            return
-//        }
-        let newNote = Note(id: 0, title: title, content: contentTextView.text ?? "", date: "")
-        let newNoteObject = NoteRealmObject(note: newNote)
-        newNoteObject.addNote()
+        guard var note = viewModel.note else {
+            let newNote = Note(id: 0, title: title, content: contentTextView.text ?? "", date: "")
+            let newNoteObject = NoteRealmObject(note: newNote)
+            newNoteObject.addNote()
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        note.title = title
+        note.content = contentTextView.text ?? ""
+        let editNoteObject = NoteRealmObject(note: note)
+        editNoteObject.updateNote()
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupData() {
+        titleTextField.text = viewModel.note?.title
+        contentTextView.text = viewModel.note?.content
     }
 }

@@ -78,16 +78,11 @@ class NoteRealmObject: Object {
         }
     }
     
-    func updateNote(title: String, content: String) {
+    func updateNote() {
         do {
             let realm = try Realm()
             try realm.write {
-                guard let noteObject = realm.object(ofType: NoteRealmObject.self, forPrimaryKey: id) else {
-                    return
-                }
-                noteObject.title = title
-                noteObject.content = content
-                let newNoteObject = realm.create(NoteRealmObject.self, value: noteObject, update: .all)
+                let newNoteObject = realm.create(NoteRealmObject.self, value: self, update: .all)
                 realm.add(newNoteObject)
             }
         } catch let error {

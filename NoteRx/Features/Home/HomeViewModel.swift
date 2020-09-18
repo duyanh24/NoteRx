@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class HomeViewModel: ViewModel {
-    let listNote = PublishRelay<[Note]>()
+    let listNote = BehaviorRelay<[Note]>(value: [])
     
     func getAllNote() {
         let notes = NoteRealmObject.getAllNote()

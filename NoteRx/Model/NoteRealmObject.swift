@@ -48,7 +48,16 @@ class NoteRealmObject: Object {
         do {
             let realm = try Realm()
             try realm.write {
-                id = Self.getIdMax() + 1
+                let results = realm.objects(NoteRealmObject.self)
+                if results.filter({ [weak self] (noteObject) -> Bool in
+                    guard let self = self else {
+                        return false
+                    }
+                    return noteObject.id == self.id
+                }).isEmpty {
+                    id = Self.getIdMax() + 1
+                }
+                
                 let object = realm.create(NoteRealmObject.self, value: self, update: .all)
                 realm.add(object)
             }
@@ -78,16 +87,11 @@ class NoteRealmObject: Object {
         }
     }
     
-    func updateNote(title: String, content: String) {
+    func updateNote() {
         do {
             let realm = try Realm()
             try realm.write {
-                guard let noteObject = realm.object(ofType: NoteRealmObject.self, forPrimaryKey: id) else {
-                    return
-                }
-                noteObject.title = title
-                noteObject.content = content
-                let newNoteObject = realm.create(NoteRealmObject.self, value: noteObject, update: .all)
+                let newNoteObject = realm.create(NoteRealmObject.self, value: self, update: .all)
                 realm.add(newNoteObject)
             }
         } catch let error {

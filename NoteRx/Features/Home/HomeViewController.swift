@@ -9,16 +9,21 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 class HomeViewController: BaseViewController, ViewModelBased {
     @IBOutlet weak var noteTableView: UITableView!
     
     var viewModel: HomeViewModel!
     let disposeBag = DisposeBag()
+    private var notificationToken: NotificationToken?
+    private let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupObserver()
         bindViewModelData()
+        handleAction()
         viewModel.getAllNote()
     }
     
@@ -30,6 +35,17 @@ class HomeViewController: BaseViewController, ViewModelBased {
             cell.setupData(note: note)
             return cell
         }.disposed(by: disposeBag)
+        
+        noteTableView.rx.itemSelected.subscribe(onNext: { [weak self] (indexPath) in
+            guard let self = self, self.viewModel.listNote.value.indices.contains(indexPath.row) else {
+                return
+            }
+            let noteDetailViewModel = NoteDetailViewModel(note: self.viewModel.listNote.value[indexPath.row])
+            guard let noteDetailViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+                return
+            }
+            self.navigationController?.pushViewController(noteDetailViewController, animated: true)
+        }).disposed(by: disposeBag)
     }
     
     private func setupTableView() {
@@ -43,11 +59,27 @@ class HomeViewController: BaseViewController, ViewModelBased {
     }
     
     private func setupBarButton() {
-        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNoteButtonClicked))
         navigationItem.rightBarButtonItem = addBarButton
         navigationItem.title = StringConstants.noteTitle
     }
     
-    @objc private func addNoteButtonClicked() {
+    private func setupObserver() {
+        let realm = try! Realm()
+        notificationToken = realm.objects(NoteRealmObject.self).observe({ [weak self] _ in
+            self?.viewModel.getAllNote()
+        })
+    }
+    
+    private func handleAction() {
+        addBarButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            let noteDetailViewModel = NoteDetailViewModel(note: nil)
+            guard let noteDetalViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+                return
+            }
+            self.navigationController?.pushViewController(noteDetalViewController, animated: true)
+        }).disposed(by: disposeBag)
     }
 }

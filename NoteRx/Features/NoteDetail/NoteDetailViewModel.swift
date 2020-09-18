@@ -9,9 +9,9 @@
 import Foundation
 
 class NoteDetailViewModel: ViewModel {
-    var note: Note?
+    var note: Note
     
     init(note: Note?) {
-        self.note = note
+        self.note = note ?? Note(id: 0, title: "", content: "", date: "")
     }
 }

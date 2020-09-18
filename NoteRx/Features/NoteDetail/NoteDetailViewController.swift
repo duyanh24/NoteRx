@@ -7,52 +7,72 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class NoteDetailViewController: BaseViewController, ViewModelBased {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
     
+    private let saveBarButton = UIBarButtonItem(title: StringConstants.save, style: .plain, target: self, action: nil)
     var viewModel: NoteDetailViewModel!
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func setupUI() {
         super.setupUI()
         setupBarButton()
-        setupData()
+        setupInitData()
+        bindData()
+        handleAction()
     }
     
     private func setupBarButton() {
-        let saveBarButton = UIBarButtonItem(title: StringConstants.save, style: .plain, target: self, action: #selector(saveNoteButtonClicked))
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.title = StringConstants.noteDetail
     }
     
-    @objc func saveNoteButtonClicked() {
-        guard let title = titleTextField.text, title != "" else {
-            self.showToast(message : "Chưa nhập chủ đề ")
-            return
-        }
-        guard var note = viewModel.note else {
-            let newNote = Note(id: 0, title: title, content: contentTextView.text ?? "", date: "")
-            let newNoteObject = NoteRealmObject(note: newNote)
-            newNoteObject.addNote()
-            navigationController?.popViewController(animated: true)
-            return
-        }
-        
-        note.title = title
-        note.content = contentTextView.text ?? ""
-        let editNoteObject = NoteRealmObject(note: note)
-        editNoteObject.updateNote()
-        navigationController?.popViewController(animated: true)
+    private func setupInitData() {
+        titleTextField.text = viewModel.note.title
+        contentTextView.text = viewModel.note.content
     }
     
-    private func setupData() {
-        titleTextField.text = viewModel.note?.title
-        contentTextView.text = viewModel.note?.content
+    private func bindData() {
+        titleTextField.rx.text.subscribe(onNext: { [weak self] (noteTitle) in
+            guard let self = self else {
+                return
+            }
+            guard let noteTitleNotNil = noteTitle else {
+                self.saveBarButton.isEnabled = false
+                return
+            }
+            self.viewModel.note.title = noteTitleNotNil
+        }).disposed(by: disposeBag)
+        
+        titleTextField.rx.text
+            .map { !$0.isNilOrEmpty }
+            .bind(to: saveBarButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        contentTextView.rx.text.subscribe(onNext: { [weak self] (noteContent) in
+            guard let self = self, let noteContent = noteContent else {
+                return
+            }
+            self.viewModel.note.content = noteContent
+        }).disposed(by: disposeBag)
+    }
+    
+    private func handleAction() {
+        saveBarButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            let editNoteObject = NoteRealmObject(note: self.viewModel.note)
+            editNoteObject.addNote()
+            self.navigationController?.popViewController(animated: true)
+        }).disposed(by: disposeBag)
     }
 }

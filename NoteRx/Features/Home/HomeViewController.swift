@@ -17,12 +17,14 @@ class HomeViewController: BaseViewController, ViewModelBased {
     var viewModel: HomeViewModel!
     let disposeBag = DisposeBag()
     private var notificationToken: NotificationToken?
+    private let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModelData()
-        viewModel.getAllNote()
         setupObserver()
+        bindViewModelData()
+        handleAction()
+        viewModel.getAllNote()
     }
     
     private func bindViewModelData() {
@@ -33,10 +35,20 @@ class HomeViewController: BaseViewController, ViewModelBased {
             cell.setupData(note: note)
             return cell
         }.disposed(by: disposeBag)
+        
+        noteTableView.rx.itemSelected.subscribe(onNext: { [weak self] (indexPath) in
+            guard let self = self, self.viewModel.listNote.value.indices.contains(indexPath.row) else {
+                return
+            }
+            let noteDetailViewModel = NoteDetailViewModel(note: self.viewModel.listNote.value[indexPath.row])
+            guard let noteDetailViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+                return
+            }
+            self.navigationController?.pushViewController(noteDetailViewController, animated: true)
+        }).disposed(by: disposeBag)
     }
     
     private func setupTableView() {
-        noteTableView.delegate = self
         noteTableView.register(UINib(nibName: "NoteTableViewCell", bundle: nil), forCellReuseIdentifier: "NoteTableViewCell")
     }
     
@@ -47,7 +59,6 @@ class HomeViewController: BaseViewController, ViewModelBased {
     }
     
     private func setupBarButton() {
-        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNoteButtonClicked))
         navigationItem.rightBarButtonItem = addBarButton
         navigationItem.title = StringConstants.noteTitle
     }
@@ -59,24 +70,16 @@ class HomeViewController: BaseViewController, ViewModelBased {
         })
     }
     
-    @objc private func addNoteButtonClicked() {
-        let noteDetailViewModel = NoteDetailViewModel(note: nil)
-        guard let noteDetalViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
-            return
-        }
-        navigationController?.pushViewController(noteDetalViewController, animated: true)
-    }
-}
-
-extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard viewModel.listNote.value.indices.contains(indexPath.row) else {
-            return
-        }
-        let noteDetailViewModel = NoteDetailViewModel(note: viewModel.listNote.value[indexPath.row])
-        guard let noteDetailViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
-            return
-        }
-        navigationController?.pushViewController(noteDetailViewController, animated: true)
+    private func handleAction() {
+        addBarButton.rx.tap.subscribe(onNext: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            let noteDetailViewModel = NoteDetailViewModel(note: nil)
+            guard let noteDetalViewController = NoteDetailViewController.instantiate(withViewModel: noteDetailViewModel) else {
+                return
+            }
+            self.navigationController?.pushViewController(noteDetalViewController, animated: true)
+        }).disposed(by: disposeBag)
     }
 }
